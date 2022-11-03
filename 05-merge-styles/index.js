@@ -13,7 +13,7 @@ const { readdir, stat, readFile, writeFile} = require('fs/promises');
         template.push(input);
       }
     }
-  };
+  }
   await writeFile(path.join(__dirname, 'project-dist', 'bundle.css'), template.join('\n'));
 })();
 

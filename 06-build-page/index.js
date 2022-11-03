@@ -1,4 +1,3 @@
-const fs = require('fs');
 const path = require('path');
 const { copyFile, mkdir, readdir, readFile, writeFile, rm, stat} = require('fs/promises');
 
@@ -8,7 +7,7 @@ async function createDir(patch) {
     const removes = await readdir(patch);
     for (const file of removes) {
       await rm(path.join(patch, file), {recursive: true, force: true});
-    }; 
+    } 
   }
   catch(err) {
     console.log(err.mwssage);
@@ -35,7 +34,7 @@ async function createHTML(sours, output, component) {
         }
       }
     }
-  };
+  }
   await writeFile(output, tempHTML);
   
   
@@ -53,7 +52,7 @@ async function copyDir(sours, output) {
         await copyDir(path.join(sours, file), path.join(output, file));
       }
      
-    };
+    }
   }
   catch(err) {
     console.log(err.message); 
@@ -73,8 +72,8 @@ async function createStyle(sours, output) {
           template.push(input);
         }
       }
-    };
-    await writeFile(output, template.join('\n'))
+    }
+    await writeFile(output, template.join('\n'));
   }
   catch(err) {
     console.log(err.nessage);
@@ -82,9 +81,11 @@ async function createStyle(sours, output) {
  
 }
 
-(async () => {
+const start = async () => {
   await createDir(path.join(__dirname, 'project-dist'));
   await createHTML(path.join(__dirname, 'template.html'), path.join(__dirname, 'project-dist', 'index.html'), path.join(__dirname, 'components'));
   await createStyle(path.join(__dirname, 'styles'), path.join(__dirname, 'project-dist', 'style.css'));
   await copyDir(path.join(__dirname, 'assets'), path.join(__dirname, 'project-dist', 'assets'));
-})();
+};
+
+start();

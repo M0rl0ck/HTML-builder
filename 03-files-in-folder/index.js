@@ -1,7 +1,7 @@
 const path = require('path');
 const { readdir, stat } = require('fs/promises');
 
-(async () => {
+const showFiles = async () => {
   const files = await readdir(path.join(__dirname, 'secret-folder'));
   for (const file of files) {
     const stats = await stat(path.join(__dirname, 'secret-folder', file));
@@ -15,4 +15,6 @@ const { readdir, stat } = require('fs/promises');
       console.log(`${name} - ${ext} - ${size}kb`);
     }
   }
-})();
+};
+
+showFiles();
